@@ -1,0 +1,3 @@
+import{supabase}from'./lib/supabase';
+export async function getProducts(){if(!supabase)return[];const{data,error}=await supabase.from('products').select('*').eq('published',true).order('created_at',{ascending:false});if(error)throw error;return data||[]}
+export async function createOrder(order){if(!supabase){localStorage.setItem('hh-last-order',JSON.stringify(order));return order}const{data,error}=await supabase.from('orders').insert({customer_name:order.customer_name,email:order.email,phone:order.phone,address:order.address,items:order.items,total:order.total,status:'new'}).select().single();if(error)throw error;return data}
