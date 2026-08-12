@@ -1,0 +1,8 @@
+create extension if not exists pgcrypto;
+create table if not exists public.products(id uuid primary key default gen_random_uuid(),name text not null,slug text unique,category text,price numeric(10,2) not null default 0,compare_at_price numeric(10,2),short_description text,description text,image_url text,images jsonb default '[]'::jsonb,features jsonb default '[]'::jsonb,colors jsonb default '[]'::jsonb,stock integer not null default 0,published boolean not null default false,created_at timestamptz not null default now(),updated_at timestamptz not null default now());
+create table if not exists public.orders(id uuid primary key default gen_random_uuid(),customer_name text not null,email text not null,phone text,address text,items jsonb not null default '[]'::jsonb,total numeric(10,2) not null default 0,status text not null default 'new',created_at timestamptz not null default now());
+alter table public.products enable row level security;alter table public.orders enable row level security;
+drop policy if exists "Public can read published products" on public.products;create policy "Public can read published products" on public.products for select using(published=true);
+drop policy if exists "Public can create orders" on public.orders;create policy "Public can create orders" on public.orders for insert with check(true);
+-- For the admin dashboard, create your admin account in Supabase Auth, then add an authenticated-admin policy appropriate to your account before enabling CRUD from the browser.
+create index if not exists products_published_idx on public.products(published);create index if not exists products_category_idx on public.products(category);create index if not exists orders_created_idx on public.orders(created_at desc);
