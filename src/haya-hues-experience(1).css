@@ -1,0 +1,35 @@
+/* HAYA & HUES — EXPERIENCE LAYER */
+:root{--hh-radius:14px;--hh-radius-sm:9px;--hh-gold:#aaa970}
+
+button,input,textarea,select,.card,.product-card,.collection-card,.service-card,.contact-form,.contact-card,.admin-panel,.authbox{border-radius:var(--hh-radius-sm)}
+button,.product-card,.collection-card,.service-card,.contact-form,.contact-card,.admin-panel,.authbox{overflow:hidden}
+img{border-radius:10px}
+
+.hh-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.hh-reveal.is-visible{opacity:1;transform:translateY(0)}
+
+.product-card,.collection-card,.service-card{transition:transform .55s cubic-bezier(.22,1,.36,1),border-color .35s ease,box-shadow .55s ease}
+.product-card:hover,.collection-card:hover,.service-card:hover{transform:translateY(-6px);border-color:rgba(184,177,111,.38);box-shadow:0 18px 45px rgba(0,0,0,.14)}
+.product-card img,.collection-card img{transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.product-card:hover img,.collection-card:hover img{transform:scale(1.035)}
+
+button,.btn,a.btn{position:relative;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,background-color .3s ease}
+button:hover,.btn:hover,a.btn:hover{transform:translateY(-2px)}
+button::after,.btn::after,a.btn::after{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);transition:transform .65s ease;pointer-events:none}
+button:hover::after,.btn:hover::after,a.btn:hover::after{transform:translateX(120%)}
+
+nav a{position:relative;transition:color .3s ease}
+nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--hh-gold);transition:right .35s cubic-bezier(.22,1,.36,1)}
+nav a:hover::after,nav a.active::after{right:0}
+
+input,textarea,select{transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
+input:focus,textarea:focus,select:focus{outline:none;border-color:rgba(184,177,111,.65)!important;box-shadow:0 0 0 3px rgba(184,177,111,.07);transform:translateY(-1px)}
+
+.hh-float{animation:hhFloat 5s ease-in-out infinite}
+@keyframes hhFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+.admin .authbox,.admin .adminform,.admin .adminlist,.contact-form,.contact-card{border-radius:14px!important;box-shadow:0 22px 65px rgba(0,0,0,.12);transition:box-shadow .5s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.admin .authbox:hover,.contact-form:hover,.contact-card:hover{box-shadow:0 28px 80px rgba(0,0,0,.16);transform:translateY(-2px)}
+
+@media(max-width:700px){.product-card:hover,.collection-card:hover,.service-card:hover{transform:translateY(-3px)}.admin .authbox,.contact-form,.contact-card{border-radius:12px!important}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.hh-reveal{opacity:1;transform:none}}
